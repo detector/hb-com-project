@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component"
+           version="0.0.1"
+           method="upgrade">
+
+	<name>hotel booking</name>
+	<!-- The following elements are optional and free of formatting constraints -->
+	<creationDate>Feb 2015</creationDate>
+	<author>Mark Gu, Yaoqing Chen</author>
+	<authorEmail>mark.gu.dev@gmail.com</authorEmail>
+	<authorUrl>NA</authorUrl>
+	<copyright>Copyright Info</copyright>
+	<license>License Info</license>
+	<!--  The version string is recorded in the components table -->
+	<version>0.0.1</version>
+	<!-- The description is optional and defaults to the name -->
+	<description>A hotel booking component for exhibition ...</description>
+
+    <!-- Installer Hooks -->
+	<scriptfile>file.script.php</scriptfile>
+	
+    <!-- SQL Files -->
+    <!-- Note: The Joomla! 1.0 query method is not supported in 1.6 -->
+    <install> <!-- Runs on install -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+        </sql>
+    </install>
+
+    <uninstall> <!-- Runs on uninstall -->
+        <sql>
+            <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+        </sql>
+    </uninstall>
+	<update> <!-- Runs on update; New in 2.5 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates/mysql</schemapath>
+		</schemas>
+	</update>
+
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder
+			to copy FROM in the package to install therefore files copied
+			in this section are copied from /site/ in the package -->
+	<files folder="site">
+		<filename>controller.php</filename>
+		<filename>hotelbooking.php</filename>
+		<filename>index.html</filename>
+		<folder>models</folder>
+		<folder>views</folder>
+		<folder>controllers</folder>
+	</files>
+
+	<administration>
+		<!-- Administration Menu Section  -->
+		<menu>Hotel Booking</menu>
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder
+				to copy FROM in the package to install therefore files copied
+				in this section are copied from /admin/ in the package -->
+		<files folder="admin">
+			<!-- Admin Main File Copy Section -->
+			<filename>index.html</filename>
+			<filename>controller.php</filename>
+			<filename>hotelbooking.php</filename>
+			<filename>index.html</filename>
+			<folder>models</folder>
+			<folder>views</folder>
+			<folder>controllers</folder>			
+			<!-- SQL files section -->
+			<folder>sql</folder>
+		</files>
+	</administration>
+
+</extension>
