@@ -107,7 +107,7 @@ ORDER BY minPrice ASC;
 
 /* create view for list all available rooms */
 CREATE VIEW `#__AvailableRoomList` AS 
-Select ser.exhibition_id, ser.hotel_id, ser.room_id, group_concat(ser.BookingDate order by ser.BookingDate asc), ser.AvailableNumber, ser.BookedNumber, r.Name, r.RoomType, r.BedType, r.SellType, r.Breakfast, r.Broadband, r.Policy, r.Price, r.Description
+Select ser.exhibition_id, ser.hotel_id, ser.room_id, group_concat(ser.BookingDate order by ser.BookingDate asc) as AvailableBookingDate, ser.AvailableNumber, ser.BookedNumber, r.Name, r.RoomType, r.BedType, r.SellType, r.Breakfast, r.Broadband, r.Policy, r.Price, r.Description
 from `#__sale_exhibitions_rooms` as ser,`#__rooms` as r
 where ser.room_id = r.id and ser.AvailableNumber > ser.BookedNumber
 GROUP by ser.room_id
