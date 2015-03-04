@@ -23,15 +23,16 @@ JHtml::_('behavior.tooltip');
 	</thead>
 	<tfoot>
 		<tr>
-			<td colspan="11">
-				<?php echo $this->pagination->getListFooter(); ?>
-			</td>
 		</tr>
 	</tfoot>
     <?php foreach( $this->items as $item ) : ?>
         <tr>
             <td><?php echo $item->hotel_id; ?></td>
 			<td><?php echo $item->Name; ?></td>
+			<td><?php echo $item->Description; ?></td>
+			<td><?php echo $item->HotelAddress; ?></td>
+			<td><?php echo $item->HotelPhotoNumber; ?></td>
+			<td><?php echo $item->HotelEmail; ?></td>
 			<td><?php echo $item->maxPrice; ?></td>
 			<td><?php echo $item->minPrice; ?></td>
         </tr>

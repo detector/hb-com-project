@@ -43,17 +43,17 @@ class HotelbookingModelHotelList extends JModelList
 		
 		//JLog::add('output classname: ' . $myclassname);
 
-		$mainframe = JFactory::getApplication();
+		//$mainframe = JFactory::getApplication();
 
 		// Get pagination request variables
-		$limit = $mainframe->getUserStateFromRequest('global.list.limit', 'limit', $mainframe->getCfg('list_limit'), 'int');
-		$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
+		//$limit = $mainframe->getUserStateFromRequest('global.list.limit', 'limit', $mainframe->getCfg('list_limit'), 'int');
+		//$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
 
 		// In case limit has been changed, adjust it
-		$limitstart = ($limit != 0 ? (floor($limitstart / $limit) * $limit) : 0);
+		//$limitstart = ($limit != 0 ? (floor($limitstart / $limit) * $limit) : 0);
 
-		$this->setState('limit', $limit);
-		$this->setState('limitstart', $limitstart);
+		//$this->setState('limit', $limit);
+		//$this->setState('limitstart', $limitstart);
 		
 		JLog::add($functionname . ' limit = ' . $limit . ' limitstart ' . $limitstart, JLog::DEBUG);
 	}
@@ -66,7 +66,7 @@ class HotelbookingModelHotelList extends JModelList
 		
 		if (empty($this->_data)) {
 			$query = $this->getListQuery();
-			$this->_data = $this->_getList($query, $this->getState('limitstart'), $this->getState('limit'));	
+			$this->_data = $this->_getList($query);
 		}
 		
 		return $this->_data;
@@ -85,19 +85,19 @@ class HotelbookingModelHotelList extends JModelList
 		return $this->_total;
 	}
 	
-	function getPagination()
-	{
-		$functionname = $this->classname . '.getPagination';
-		JLog::add('Enter ' . $functionname, JLog::DEBUG);
+	// function getPagination()
+	// {
+		// $functionname = $this->classname . '.getPagination';
+		// JLog::add('Enter ' . $functionname, JLog::DEBUG);
 		
-		// Load the content if it doesn't already exist
+		// // Load the content if it doesn't already exist
 		
-		if (empty($this->_pagination)) {
-			jimport('joomla.html.pagination');
-			$this->_pagination = new JPagination($this->getTotal(), $this->getState('limitstart'), $this->getState('limit') );
-		}
-		return $this->_pagination;
-	}
+		// if (empty($this->_pagination)) {
+			// jimport('joomla.html.pagination');
+			// $this->_pagination = new JPagination($this->getTotal(), $this->getState('limitstart'), $this->getState('limit') );
+		// }
+		// return $this->_pagination;
+	// }
 	
 	/**
 	 * Method to build an SQL query to load the list data.
@@ -115,7 +115,7 @@ class HotelbookingModelHotelList extends JModelList
 		// Select some fields
 		$query->select('*');
 		// From the tablename
-		$query->from('#__hotelavailable');
+		$query->from('#__AvailableHotelList');
 		return $query;
 	}
 }

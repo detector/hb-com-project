@@ -58,7 +58,7 @@ class HotelbookingController extends JControllerLegacy
 		JLog::add($functionname . ' viewname = ' . $viewName, JLog::DEBUG);
 		switch ($viewName)
 		{
-			case 'hotelbooking':
+			case 'hotellist':
 				/*
 				//JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_solidres/tables', 'SolidresTable');
 				//JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_solidres/models', 'SolidresModel');
@@ -89,7 +89,7 @@ class HotelbookingController extends JControllerLegacy
 
 				$document = JFactory::getDocument();
 				$viewType = $document->getType();
-				$viewName = 'hotelbooking';
+				$viewName = 'hotellist';
 				$viewLayout = 'default';
 
 				$view = $this->getView($viewName, $viewType, '', array('base_path' => $this->basePath, 'layout' => $viewLayout));
