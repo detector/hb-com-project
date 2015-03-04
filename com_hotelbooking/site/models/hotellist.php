@@ -72,18 +72,18 @@ class HotelbookingModelHotelList extends JModelList
 		return $this->_data;
 	}
 	
-	function getTotal()
-	{
-		$functionname = $this->classname . '.getTotal';
-		JLog::add('Enter ' . $functionname, JLog::DEBUG);
-		// Load the content if it doesn't already exist
-		if (empty($this->_total)) {
-			$query = $this->getListQuery();
-			$this->_total = $this->_getListCount($query);
-			JLog::add($functionname . ' _total=' . $this->_total, JLog::DEBUG);
-		}
-		return $this->_total;
-	}
+	// function getTotal()
+	// {
+		// $functionname = $this->classname . '.getTotal';
+		// JLog::add('Enter ' . $functionname, JLog::DEBUG);
+		// // Load the content if it doesn't already exist
+		// if (empty($this->_total)) {
+			// $query = $this->getListQuery();
+			// $this->_total = $this->_getListCount($query);
+			// JLog::add($functionname . ' _total=' . $this->_total, JLog::DEBUG);
+		// }
+		// return $this->_total;
+	// }
 	
 	// function getPagination()
 	// {
