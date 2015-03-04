@@ -99,6 +99,48 @@ class HotelbookingController extends JControllerLegacy
 				JLog::add('start to display the view ... in ' . $viewName, JLog::DEBUG);
 				$view->display();
 				break;
+			case 'roomlist':
+				/*
+				//JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_solidres/tables', 'SolidresTable');
+				//JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_solidres/models', 'SolidresModel');
+
+				if ($user->get('guest') == 1)
+				{
+					// Redirect to login page.
+					$return = JRoute::_('index.php?option=com_solidres&view=customer', false);
+					$this->setRedirect(JRoute::_('index.php?option=com_users&view=login&return=' . base64_encode($return), false));
+					return;
+				}
+
+				foreach ($customerUserGroups as $customerUserGroup)
+				{
+					if (!in_array($customerUserGroup, $userGroups))
+					{
+						JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+						return false;
+					}
+				}
+				*/
+				$modelAvaiableHotels = JModelLegacy::getInstance('RoomList', 'HotelBookingModel', array('ignore_request' => false));
+				//$modelAsset = JModelLegacy::getInstance('ReservationAsset', 'SolidresModel', array('ignore_request' => false));
+				//$customerTable = JTable::getInstance('Customer', 'SolidresTable');
+				//$customerTable->load(array('user_id' => $user->get('id')));
+				//$modelReservations->setState('filter.customer_id', isset($customerTable->id) ? $customerTable->id : 0 );
+				//$modelReservations->setState('filter.customer_email', $user->get('email') );
+
+				$document = JFactory::getDocument();
+				$viewType = $document->getType();
+				$viewName = 'roomlist';
+				$viewLayout = 'default';
+
+				$view = $this->getView($viewName, $viewType, '', array('base_path' => $this->basePath, 'layout' => $viewLayout));
+				$view->setModel($modelAvaiableHotels, true);
+				//$view->setModel($modelAsset);
+				$view->document = $document;
+				JLog::add('start to display the view ... in ' . $viewName, JLog::DEBUG);
+				$view->display();
+				break;
+				
 			case 'orderlist':
 				if ($user->get('guest') == 1)
 				{
