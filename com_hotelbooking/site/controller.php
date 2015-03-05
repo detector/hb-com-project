@@ -59,27 +59,27 @@ class HotelbookingController extends JControllerLegacy
 		switch ($viewName)
 		{
 			case 'hotellist':
-				/*
 				//JTable::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_solidres/tables', 'SolidresTable');
 				//JModelLegacy::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_solidres/models', 'SolidresModel');
-
+				//set view name when 
+				
 				if ($user->get('guest') == 1)
 				{
 					// Redirect to login page.
-					$return = JRoute::_('index.php?option=com_solidres&view=customer', false);
+					$return = JRoute::_('index.php?option=com_hotelbooking&view=hotellist', false);
 					$this->setRedirect(JRoute::_('index.php?option=com_users&view=login&return=' . base64_encode($return), false));
 					return;
 				}
 
-				foreach ($customerUserGroups as $customerUserGroup)
-				{
-					if (!in_array($customerUserGroup, $userGroups))
-					{
-						JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
-						return false;
-					}
-				}
-				*/
+				// foreach ($customerUserGroups as $customerUserGroup)
+				// {
+					// if (!in_array($customerUserGroup, $userGroups))
+					// {
+						// JError::raiseError(403, JText::_('JERROR_ALERTNOAUTHOR'));
+						// return false;
+					// }
+				// }
+
 				$modelAvaiableHotels = JModelLegacy::getInstance('HotelList', 'HotelBookingModel', array('ignore_request' => false));
 				//$modelAsset = JModelLegacy::getInstance('ReservationAsset', 'SolidresModel', array('ignore_request' => false));
 				//$customerTable = JTable::getInstance('Customer', 'SolidresTable');
@@ -89,7 +89,7 @@ class HotelbookingController extends JControllerLegacy
 
 				$document = JFactory::getDocument();
 				$viewType = $document->getType();
-				$viewName = 'hotellist';
+				//$viewName = 'hotellist';
 				$viewLayout = 'default';
 
 				$view = $this->getView($viewName, $viewType, '', array('base_path' => $this->basePath, 'layout' => $viewLayout));
@@ -111,7 +111,7 @@ class HotelbookingController extends JControllerLegacy
 					$this->setRedirect(JRoute::_('index.php?option=com_users&view=login&return=' . base64_encode($return), false));
 					return;
 				}
-
+				
 				foreach ($customerUserGroups as $customerUserGroup)
 				{
 					if (!in_array($customerUserGroup, $userGroups))
@@ -121,13 +121,17 @@ class HotelbookingController extends JControllerLegacy
 					}
 				}
 				*/
-				$modelAvaiableHotels = JModelLegacy::getInstance('RoomList', 'HotelBookingModel', array('ignore_request' => false));
+				//get the hotel
+				$hotel_id = $this->input->get('hotel_id');
+				JLog::add('in ' . $viewName . ' hotel_id=' . $hotel_id, JLog::DEBUG);
+				$modelAvaiableHotels = JModelLegacy::getInstance('RoomList', 'HotelBookingModel', array('ignore_request' => false, 'hotel_id' => $hotel_id));
 				//$modelAsset = JModelLegacy::getInstance('ReservationAsset', 'SolidresModel', array('ignore_request' => false));
 				//$customerTable = JTable::getInstance('Customer', 'SolidresTable');
 				//$customerTable->load(array('user_id' => $user->get('id')));
 				//$modelReservations->setState('filter.customer_id', isset($customerTable->id) ? $customerTable->id : 0 );
 				//$modelReservations->setState('filter.customer_email', $user->get('email') );
-
+				
+				
 				$document = JFactory::getDocument();
 				$viewType = $document->getType();
 				$viewName = 'roomlist';

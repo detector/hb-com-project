@@ -49,6 +49,7 @@ CREATE TABLE `#__rooms` (
 	`id`					INT(11)     NOT NULL AUTO_INCREMENT,
 	`hotel_id`				INT(11)     NOT NULL DEFAULT 0,
 	`Name`					VARCHAR(255) NOT NULL,
+	`RoomPrefix`			VARCHAR(255) NOT NULL,
 	`RoomType`				tinyint(4) NOT NULL DEFAULT 0,
 	`BedType`				tinyint(4) NOT NULL DEFAULT 0,
 	`SellType`				tinyint(4) NOT NULL DEFAULT 0,
@@ -107,7 +108,7 @@ ORDER BY minPrice ASC;
 
 /* create view for list all available rooms */
 CREATE VIEW `#__AvailableRoomList` AS 
-Select ser.exhibition_id, ser.hotel_id, ser.room_id, group_concat(ser.BookingDate order by ser.BookingDate asc) as AvailableBookingDate, ser.AvailableNumber, ser.BookedNumber, r.Name, r.RoomType, r.BedType, r.SellType, r.Breakfast, r.Broadband, r.Policy, r.Price, r.Description
+Select ser.exhibition_id, ser.hotel_id, ser.room_id, group_concat(ser.BookingDate order by ser.BookingDate asc) as AvailableBookingDate, ser.AvailableNumber, ser.BookedNumber, r.Name, r.RoomPrefix, r.RoomType, r.BedType, r.SellType, r.Breakfast, r.Broadband, r.Policy, r.Price, r.Description
 from `#__sale_exhibitions_rooms` as ser,`#__rooms` as r
 where ser.room_id = r.id and ser.AvailableNumber > ser.BookedNumber
 GROUP by ser.room_id
@@ -131,31 +132,31 @@ INSERT INTO `#__hotels` (`Name` , `HotelType`, `HotelLevel`, `HotelFeature`, `De
 ('乌镇No.7', 0, 7, 7, '乌镇No.7 hotel, 7 star!', '乌镇No.7');
 
 /* Insert Init Data in Rooms table */
-INSERT INTO `#__rooms` (`hotel_id`, `Name` , `RoomType`, `BedType`, `Breakfast`, `Broadband`, `Policy`, `Price`, `AvailableNumber`, `Description`, `DetailInfoFilePath`) VALUES
-(1, '乌镇No.0-0', 0, 1, 0, 0, 0, 0.01, 10,	'乌镇No.0 hotel, 0 star!, 0-0 room', '乌镇No.0_room0'),
-(1, '乌镇No.0-1', 0, 1, 0, 0, 0, 0.01, 20,	'乌镇No.0 hotel, 0 star!, 0-1 room', '乌镇No.0_room1'),
-(1, '乌镇No.0-2', 0, 1, 0, 0, 0, 0.01, 30,	'乌镇No.0 hotel, 0 star!, 0-2 room', '乌镇No.0_room2'),
-(2, '乌镇No.1-0', 0, 1, 0, 0, 0, 0.02, 2,	'乌镇No.1 hotel, 1 star!, 0-0 room', '乌镇No.1_room0'),
-(2, '乌镇No.1-1', 0, 1, 0, 0, 0, 0.02, 3,	'乌镇No.1 hotel, 1 star!, 0-1 room', '乌镇No.1_room1'),
-(2, '乌镇No.1-2', 0, 1, 0, 0, 0, 0.02, 4,	'乌镇No.1 hotel, 1 star!, 0-2 room', '乌镇No.1_room2'),
-(3, '乌镇No.2-0', 0, 1, 0, 0, 0, 0.03, 3,	'乌镇No.2 hotel, 2 star!, 0-0 room', '乌镇No.2_room0'),
-(3, '乌镇No.2-1', 0, 1, 0, 0, 0, 0.03, 4,	'乌镇No.2 hotel, 2 star!, 0-1 room', '乌镇No.2_room1'),
-(3, '乌镇No.2-2', 0, 1, 0, 0, 0, 0.03, 5,	'乌镇No.2 hotel, 2 star!, 0-2 room', '乌镇No.2_room2'),
-(4, '乌镇No.3-0', 0, 1, 0, 0, 0, 0.04, 4,	'乌镇No.3 hotel, 3 star!, 0-0 room', '乌镇No.3_room0'),
-(4, '乌镇No.3-1', 0, 1, 0, 0, 0, 0.04, 5,	'乌镇No.3 hotel, 3 star!, 0-1 room', '乌镇No.3_room1'),
-(4, '乌镇No.3-2', 0, 1, 0, 0, 0, 0.04, 6,	'乌镇No.3 hotel, 3 star!, 0-3 room', '乌镇No.3_room2'),
-(5, '乌镇No.4-0', 0, 1, 0, 0, 0, 0.13, 5,	'乌镇No.4 hotel, 4 star!, 0-0 room', '乌镇No.4_room0'),
-(5, '乌镇No.4-1', 0, 1, 0, 0, 0, 0.05, 6,	'乌镇No.4 hotel, 4 star!, 0-1 room', '乌镇No.4_room1'),
-(5, '乌镇No.4-2', 0, 1, 0, 0, 0, 0.05, 7,	'乌镇No.4 hotel, 4 star!, 0-4 room', '乌镇No.4_room2'),
-(6, '乌镇No.5-0', 0, 1, 0, 0, 0, 0.11, 60,	'乌镇No.5 hotel, 5 star!, 0-0 room', '乌镇No.5_room0'),
-(6, '乌镇No.5-1', 0, 1, 0, 0, 0, 0.06, 50,	'乌镇No.5 hotel, 5 star!, 0-1 room', '乌镇No.5_room1'),
-(6, '乌镇No.5-2', 0, 1, 0, 0, 0, 0.06, 40,	'乌镇No.5 hotel, 5 star!, 0-5 room', '乌镇No.5_room2'),
-(7, '乌镇No.6-0', 0, 1, 0, 0, 0, 0.07, 7,	'乌镇No.6 hotel, 6 star!, 0-0 room', '乌镇No.6_room0'),
-(7, '乌镇No.6-1', 0, 1, 0, 0, 0, 0.07, 8,	'乌镇No.6 hotel, 6 star!, 0-1 room', '乌镇No.6_room1'),
-(7, '乌镇No.6-2', 0, 1, 0, 0, 0, 0.10, 9,	'乌镇No.6 hotel, 6 star!, 0-6 room', '乌镇No.6_room2'),
-(8, '乌镇No.7-0', 0, 1, 0, 0, 0, 0.08, 8,	'乌镇No.7 hotel, 7 star!, 0-0 room', '乌镇No.7_room0'),
-(8, '乌镇No.7-1', 0, 1, 0, 0, 0, 0.08, 9,	'乌镇No.7 hotel, 7 star!, 0-1 room', '乌镇No.7_room1'),
-(8, '乌镇No.7-2', 0, 1, 0, 0, 0, 0.08, 10,	'乌镇No.7 hotel, 7 star!, 0-7 room', '乌镇No.7_room2');
+INSERT INTO `#__rooms` (`hotel_id`, `Name` , `RoomPrefix`, `RoomType`, `BedType`, `Breakfast`, `Broadband`, `Policy`, `Price`, `AvailableNumber`, `Description`, `DetailInfoFilePath`) VALUES
+(1, '乌镇No.0-0', '紫藤', 0, 1, 0, 0, 0, 0.01, 10,	'乌镇No.0 hotel, 0 star!, 0-0 room', '乌镇No.0_room0'),
+(1, '乌镇No.0-1', '紫藤', 0, 1, 0, 0, 0, 0.01, 20,	'乌镇No.0 hotel, 0 star!, 0-1 room', '乌镇No.0_room1'),
+(1, '乌镇No.0-2', '紫藤', 0, 1, 0, 0, 0, 0.01, 30,	'乌镇No.0 hotel, 0 star!, 0-2 room', '乌镇No.0_room2'),
+(2, '乌镇No.1-0', '水巷驿', 0, 1, 0, 0, 0, 0.02, 2,	'乌镇No.1 hotel, 1 star!, 0-0 room', '乌镇No.1_room0'),
+(2, '乌镇No.1-1', '水巷驿', 0, 1, 0, 0, 0, 0.02, 3,	'乌镇No.1 hotel, 1 star!, 0-1 room', '乌镇No.1_room1'),
+(2, '乌镇No.1-2', '水巷驿', 0, 1, 0, 0, 0, 0.02, 4,	'乌镇No.1 hotel, 1 star!, 0-2 room', '乌镇No.1_room2'),
+(3, '乌镇No.2-0', '乌镇民宿', 0, 1, 0, 0, 0, 0.03, 3,	'乌镇No.2 hotel, 2 star!, 0-0 room', '乌镇No.2_room0'),
+(3, '乌镇No.2-1', '乌镇民宿', 0, 1, 0, 0, 0, 0.03, 4,	'乌镇No.2 hotel, 2 star!, 0-1 room', '乌镇No.2_room1'),
+(3, '乌镇No.2-2', '乌镇民宿', 0, 1, 0, 0, 0, 0.03, 5,	'乌镇No.2 hotel, 2 star!, 0-2 room', '乌镇No.2_room2'),
+(4, '乌镇No.3-0', '望津里精品酒店', 0, 1, 0, 0, 0, 0.04, 4,	'乌镇No.3 hotel, 3 star!, 0-0 room', '乌镇No.3_room0'),
+(4, '乌镇No.3-1', '望津里精品酒店', 0, 1, 0, 0, 0, 0.04, 5,	'乌镇No.3 hotel, 3 star!, 0-1 room', '乌镇No.3_room1'),
+(4, '乌镇No.3-2', '望津里精品酒店', 0, 1, 0, 0, 0, 0.04, 6,	'乌镇No.3 hotel, 3 star!, 0-3 room', '乌镇No.3_room2'),
+(5, '乌镇No.4-0', '通安客栈贵宾楼', 0, 1, 0, 0, 0, 0.13, 5,	'乌镇No.4 hotel, 4 star!, 0-0 room', '乌镇No.4_room0'),
+(5, '乌镇No.4-1', '通安客栈贵宾楼', 0, 1, 0, 0, 0, 0.05, 6,	'乌镇No.4 hotel, 4 star!, 0-1 room', '乌镇No.4_room1'),
+(5, '乌镇No.4-2', '通安客栈贵宾楼', 0, 1, 0, 0, 0, 0.05, 7,	'乌镇No.4 hotel, 4 star!, 0-4 room', '乌镇No.4_room2'),
+(6, '乌镇No.5-0', '枕水度假酒店', 0, 1, 0, 0, 0, 0.11, 60,	'乌镇No.5 hotel, 5 star!, 0-0 room', '乌镇No.5_room0'),
+(6, '乌镇No.5-1', '枕水度假酒店', 0, 1, 0, 0, 0, 0.06, 50,	'乌镇No.5 hotel, 5 star!, 0-1 room', '乌镇No.5_room1'),
+(6, '乌镇No.5-2', '枕水度假酒店', 0, 1, 0, 0, 0, 0.06, 40,	'乌镇No.5 hotel, 5 star!, 0-5 room', '乌镇No.5_room2'),
+(7, '乌镇No.6-0', '昭明书舍', 0, 1, 0, 0, 0, 0.07, 7,	'乌镇No.6 hotel, 6 star!, 0-0 room', '乌镇No.6_room0'),
+(7, '乌镇No.6-1', '昭明书舍', 0, 1, 0, 0, 0, 0.07, 8,	'乌镇No.6 hotel, 6 star!, 0-1 room', '乌镇No.6_room1'),
+(7, '乌镇No.6-2', '昭明书舍', 0, 1, 0, 0, 0, 0.10, 9,	'乌镇No.6 hotel, 6 star!, 0-6 room', '乌镇No.6_room2'),
+(8, '乌镇No.7-0', '宜园会所', 0, 1, 0, 0, 0, 0.08, 8,	'乌镇No.7 hotel, 7 star!, 0-0 room', '乌镇No.7_room0'),
+(8, '乌镇No.7-1', '宜园会所', 0, 1, 0, 0, 0, 0.08, 9,	'乌镇No.7 hotel, 7 star!, 0-1 room', '乌镇No.7_room1'),
+(8, '乌镇No.7-2', '宜园会所', 0, 1, 0, 0, 0, 0.08, 10,	'乌镇No.7 hotel, 7 star!, 0-7 room', '乌镇No.7_room2');
 
 /* Insert Init Data for sales table */
 INSERT INTO `#__sale_exhibitions_rooms` (`exhibition_id`, `hotel_id`, `room_id` , `BookingDate`, `AvailableNumber`, `BookedNumber`, `Status`) VALUES

@@ -41,21 +41,8 @@ class HotelbookingModelHotelList extends JModelList
 		
 		$functionname = $this->classname . '.__construct';
 		
-		//JLog::add('output classname: ' . $myclassname);
-
-		//$mainframe = JFactory::getApplication();
-
-		// Get pagination request variables
-		//$limit = $mainframe->getUserStateFromRequest('global.list.limit', 'limit', $mainframe->getCfg('list_limit'), 'int');
-		//$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
-
-		// In case limit has been changed, adjust it
-		//$limitstart = ($limit != 0 ? (floor($limitstart / $limit) * $limit) : 0);
-
-		//$this->setState('limit', $limit);
-		//$this->setState('limitstart', $limitstart);
 		
-		JLog::add($functionname . ' limit = ' . $limit . ' limitstart ' . $limitstart, JLog::DEBUG);
+		//JLog::add($functionname . ' limit = ' . $limit . ' limitstart ' . $limitstart, JLog::DEBUG);
 	}
 	
 	function getItems() 
@@ -72,32 +59,7 @@ class HotelbookingModelHotelList extends JModelList
 		return $this->_data;
 	}
 	
-	// function getTotal()
-	// {
-		// $functionname = $this->classname . '.getTotal';
-		// JLog::add('Enter ' . $functionname, JLog::DEBUG);
-		// // Load the content if it doesn't already exist
-		// if (empty($this->_total)) {
-			// $query = $this->getListQuery();
-			// $this->_total = $this->_getListCount($query);
-			// JLog::add($functionname . ' _total=' . $this->_total, JLog::DEBUG);
-		// }
-		// return $this->_total;
-	// }
-	
-	// function getPagination()
-	// {
-		// $functionname = $this->classname . '.getPagination';
-		// JLog::add('Enter ' . $functionname, JLog::DEBUG);
-		
-		// // Load the content if it doesn't already exist
-		
-		// if (empty($this->_pagination)) {
-			// jimport('joomla.html.pagination');
-			// $this->_pagination = new JPagination($this->getTotal(), $this->getState('limitstart'), $this->getState('limit') );
-		// }
-		// return $this->_pagination;
-	// }
+
 	
 	/**
 	 * Method to build an SQL query to load the list data.

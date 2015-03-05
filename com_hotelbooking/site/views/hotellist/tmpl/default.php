@@ -22,19 +22,25 @@ JHtml::_('behavior.tooltip');
 	<thead>
 	</thead>
 	<tfoot>
-		<tr>
-		</tr>
 	</tfoot>
     <?php foreach( $this->items as $item ) : ?>
         <tr>
-            <td><?php echo $item->hotel_id; ?></td>
-			<td><?php echo $item->Name; ?></td>
+            <!--<td><?php echo $item->hotel_id; ?></td> -->
+			<td>
+				<a href="<?php echo JRoute::_('index.php?option=com_Hotelbooking&view=roomlist&hotel_id=' . (int)$item->hotel_id); ?>"> 
+					<?php echo $item->Name; ?>
+				</a>
+			</td>
 			<td><?php echo $item->Description; ?></td>
-			<td><?php echo $item->HotelAddress; ?></td>
-			<td><?php echo $item->HotelPhotoNumber; ?></td>
-			<td><?php echo $item->HotelEmail; ?></td>
-			<td><?php echo $item->maxPrice; ?></td>
-			<td><?php echo $item->minPrice; ?></td>
+			<tr>
+				<td><?php echo $item->HotelAddress; ?></td>
+				<td><?php echo $item->HotelPhotoNumber; ?></td>
+				<td><?php echo $item->HotelEmail; ?></td>
+			</tr>
+			<tr>
+				<td><?php echo $item->maxPrice; ?></td>
+				<td><?php echo $item->minPrice; ?></td>
+			</tr>
         </tr>
     <?php endforeach; ?>
 

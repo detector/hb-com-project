@@ -27,35 +27,21 @@ class HotelbookingModelRoomList extends JModelList
 	* @var integer
 	*/
 	protected $_total = null;
-
-	/**
-	* Pagination object
-	* @var object
-	*/
-	protected $_pagination = null;
 	
-	function __construct()
+	//define to filter the rooms by the hotel id
+	protected $_hotel_id = 0;
+	
+	function __construct(array $config = array())
 	{
-		parent::__construct();
+		parent::__construct($config);
 		
 		
 		$functionname = $this->classname . '.__construct';
 		
 		JLog::add('Enter ' . $functionname, JLog::DEBUG);
+		JLog::add($functionname . ' hotel_id = ' . $config['hotel_id'], JLog::DEBUG);
+		$this->_hotel_id = $config['hotel_id'];
 
-		//$mainframe = JFactory::getApplication();
-
-		// Get pagination request variables
-		//$limit = $mainframe->getUserStateFromRequest('global.list.limit', 'limit', $mainframe->getCfg('list_limit'), 'int');
-		//$limitstart = JRequest::getVar('limitstart', 0, '', 'int');
-
-		// In case limit has been changed, adjust it
-		//$limitstart = ($limit != 0 ? (floor($limitstart / $limit) * $limit) : 0);
-
-		//$this->setState('limit', $limit);
-		//$this->setState('limitstart', $limitstart);
-		
-		//JLog::add($functionname . ' limit = ' . $limit . ' limitstart ' . $limitstart, JLog::DEBUG);
 	}
 	
 	function getItems() 
@@ -72,33 +58,7 @@ class HotelbookingModelRoomList extends JModelList
 		return $this->_data;
 	}
 	
-	// function getTotal()
-	// {
-		// $functionname = $this->classname . '.getTotal';
-		// JLog::add('Enter ' . $functionname, JLog::DEBUG);
-		// // Load the content if it doesn't already exist
-		// if (empty($this->_total)) {
-			// $query = $this->getListQuery();
-			// $this->_total = $this->_getListCount($query);
-			// JLog::add($functionname . ' _total=' . $this->_total, JLog::DEBUG);
-		// }
-		// return $this->_total;
-	// }
-	
-	// function getPagination()
-	// {
-		// $functionname = $this->classname . '.getPagination';
-		// JLog::add('Enter ' . $functionname, JLog::DEBUG);
-		
-		// // Load the content if it doesn't already exist
-		
-		// if (empty($this->_pagination)) {
-			// jimport('joomla.html.pagination');
-			// $this->_pagination = new JPagination($this->getTotal(), $this->getState('limitstart'), $this->getState('limit') );
-		// }
-		// return $this->_pagination;
-	// }
-	
+
 	/**
 	 * Method to build an SQL query to load the list data.
 	 *
@@ -109,13 +69,14 @@ class HotelbookingModelRoomList extends JModelList
 		$functionname = $this->classname . '.getListQuery';
 		JLog::add('Enter ' . $functionname, JLog::DEBUG);
 		
-		// Create a new query object.		
+		// Create a new query object.
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		// Select some fields
 		$query->select('*');
 		// From the tablename
 		$query->from('#__AvailableRoomList');
+		$query->where($db->quoteName('hotel_id') . ' = ' . $this->_hotel_id);
 		return $query;
 	}
 }
