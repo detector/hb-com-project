@@ -44,6 +44,10 @@ class HotelBookingViewRoomList extends JViewLegacy
 					JError::raiseError(500, implode('<br />', $errors));
 					return false;
 			}
+			
+			JHtml::stylesheet('com_hotelbooking/elements.css', array(), true);
+			JHtml::script(JUri::base() . 'media/com_hotelbooking/js/my_js.js', true);
+			
 			// Display the view
 			parent::display($tpl);
 	}

@@ -50,7 +50,14 @@
 		<folder>views</folder>
 		<folder>controllers</folder>
 	</files>
-
+	
+    <media folder="media" destination="com_hotelbooking">
+		<filename>index.html</filename>
+		<folder>images</folder>
+		<folder>css</folder>
+		<folder>js</folder>
+    </media>
+	
 	<administration>
 		<!-- Administration Menu Section  -->
 		<menu>Hotel Booking</menu>

@@ -10,18 +10,36 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 // load tooltip behavior
-JHtml::_('behavior.tooltip');
+//JHtml::_('behavior.tooltip');
+
 ?>
 <script language="javascript">
-function ale()
-{//这个基本没有什么说的，就是弹出一个提醒的对话框
-    alert("我敢保证，你现在用的是演示一");
-}
+
 </script>
 
-<div id="hotelbooking" class="hotelbooking"><?php echo $this->getName(); ?>
-<form action="<?php echo JRoute::_('index.php?option=com_Hotelbooking'); ?>" method="post" name="bookingfrom">
+<div id="abc">
+<!-- Popup Div Starts Here -->
+<div id="popupContact">
+<!-- Contact Us Form -->
 
+<form action="#" id="form" method="post" name="form">
+<img id="close" src="images/3.png" onclick ="div_hide()">
+<h2>Contact Us</h2>
+<hr>
+<input id="name" name="name" placeholder="Name" type="text">
+<input id="email" name="email" placeholder="Email" type="text">
+<textarea id="msg" name="message" placeholder="Message"></textarea>
+<a href="javascript:%20check_empty()" id="submit">Send</a>
+</form>
+</div>
+<!-- Popup Div Ends Here -->
+</div>
+
+<div id="hotelbooking" class="hotelbooking"><?php echo $this->getName(); ?>
+
+<!--
+<form action="<?php echo JRoute::_('index.php?option=com_Hotelbooking'); ?>" method="post" name="bookingfrom">
+-->
 
 <!-- ITEMS FROM THE DATABASE GO HERE!!!! -->
 <?php if( count( $this->items )) : ?>
@@ -57,7 +75,7 @@ function ale()
 				<td><?php echo $item->Broadband; ?></td>
 				<td><?php echo $item->Policy; ?></td>
 				<td><?php echo $item->Description; ?></td>
-				<td><input type="submit" name="Submit" value="book" onclick="ale()" /></td>
+				<td><img id="book" src="<?php echo JUri::root()?>/media/com_hotelbooking/images/book.png" onclick ="div_show()"></td>
 			</tr>
 			
 
@@ -76,8 +94,8 @@ function ale()
     </table>
 <?php endif; ?>
  
-<!-- PAGINATION GOES HERE -->
-</form>
+<!-- PAGINATION GOES HERE 
+</form>-->
 
 </a>
 </div>
